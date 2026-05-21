@@ -219,3 +219,83 @@ h1, h2, h3, h4 {
     transition: 0.3s;
 }
 .btn-gold:hover { background: var(--gold); color: black; }
+
+/* ==========================================
+   AJUSTES EXCLUSIVOS PARA CELULARES Y TABLETS
+   ========================================== */
+@media (max-width: 968px) {
+    /* 1. Ajustes del Título Principal */
+    .hero h1 {
+        font-size: 2.2rem; /* Achicamos el título para que no se corte en pantallas chicas */
+        padding: 0 15px;
+    }
+
+    /* 2. Sección Conócenos (Acomodo vertical) */
+    .luxury-section {
+        padding: 60px 20px; /* Reducimos espacios vacíos */
+    }
+
+    .row-luxury, .row-luxury.reverse {
+        flex-direction: column !important; /* Fuerza a que todo vaya uno abajo del otro */
+        margin-bottom: 100px;
+        min-height: auto;
+        gap: 30px;
+    }
+
+    .img-container {
+        width: 100%; /* La imagen toma todo el ancho disponible del cel */
+        max-width: 100%;
+    }
+
+    .frame-deco {
+        top: -10px; left: -10px; right: 10px; bottom: 10px; /* Marco más ajustado en cel */
+    }
+
+    /* Ajuste de los textos flotantes para que ya no floten y se lean bien */
+    .floating-text {
+        width: 100% !important;
+        position: relative !important; /* Deja de encimarse en la foto */
+        left: 0 !important;
+        right: 0 !important;
+        padding: 30px 20px;
+        box-shadow: none;
+        background: rgba(15, 15, 15, 0.5); /* Más integrado al fondo */
+    }
+
+    .floating-text h2 {
+        font-size: 1.8rem;
+    }
+
+    .big-num {
+        font-size: 4rem; /* Número más discreto en móvil */
+        top: -25px;
+    }
+
+    /* 3. Sección Mirada al Alma */
+    .parallax-fixed {
+        background-attachment: scroll; /* El parallax fijo falla en muchos cels, cambiamos a scroll normal */
+    }
+
+    .glass-card {
+        padding: 30px 20px;
+        margin: 0 15px;
+    }
+
+    .glass-card h3 {
+        font-size: 1.8rem;
+    }
+
+    /* 4. Sección Texturas Únicas */
+    .texture-section {
+        padding: 60px 20px;
+    }
+
+    .texture-grid {
+        grid-template-columns: 1fr; /* Una sola columna en lugar de dos */
+        gap: 30px;
+    }
+
+    .texture-text h2 {
+        font-size: 2rem;
+    }
+}
