@@ -55,3 +55,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 });
+
+// LÓGICA DE LA PANTALLA DE INTRO CON VIDEO
+document.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.getElementById('intro-preloader');
+    const btnEntrar = document.getElementById('btn-entrar');
+
+    // Bloqueamos el scroll del cuerpo al cargar para congelar la pantalla trasera
+    document.body.classList.add('no-scroll');
+
+    if (btnEntrar && preloader) {
+        btnEntrar.addEventListener('click', () => {
+            // Ejecuta la animación de desvanecimiento y zoom en el CSS
+            preloader.classList.add('fade-out');
+
+            // Permitimos el scroll de nuevo una vez que la intro desaparece
+            document.body.classList.remove('no-scroll');
+        });
+    }
+});
