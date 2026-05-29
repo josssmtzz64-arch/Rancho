@@ -419,4 +419,70 @@ h1, h2, h3, h4 {
     top: 15px;
     left: -10px;
 }
+
+/* ==========================================
+   PANTALLA DE INTRO (PRELOADER CINEMÁTICO)
+   ========================================== */
+#intro-preloader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: #000;
+    z-index: 9999; /* Se superpone a absolutamente todo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.2s;
+    will-change: opacity, transform;
+}
+
+#intro-video {
+    position: absolute;
+    top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
+    width: auto; height: auto;
+    transform: translate(-50%, -50%) scale(1); /* Inicia en tamaño normal */
+    object-fit: cover;
+    transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+/* Capa oscura encima del video para que resalte el botón de entrar */
+.intro-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 80%);
+    width: 100%; height: 100%;
+    justify-content: center;
+}
+
+.intro-title {
+    color: var(--light);
+    font-size: 2rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* Efecto cuando la página se activa (El video hace zoom hacia el usuario) */
+#intro-preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#intro-preloader.fade-out #intro-video {
+    transform: translate(-50%, -50%) scale(1.25); /* Efecto de zoom progresivo hacia adelante */
+}
+
+/* Evita que se pueda scrollear la página trasera mientras está la intro */
+body.no-scroll {
+    overflow: hidden;
+}
 }
