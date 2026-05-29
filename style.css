@@ -19,6 +19,87 @@ h1, h2, h3, h4 {
     letter-spacing: 4px; 
 }
 
+/* ==========================================
+   PANTALLA DE INTRO (BLOQUEO GLOBAL PARA PC Y CEL)
+   ========================================== */
+html.no-scroll, body.no-scroll {
+    overflow: hidden !important;
+    height: 100vh !important;
+    width: 100% !important;
+    position: fixed !important; /* Congela el fondo de manera estricta */
+}
+
+#intro-preloader {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: #000;
+    z-index: 999999 !important; /* Capa por encima de todo */
+    overflow: hidden;
+    transition: opacity 1.2s ease, visibility 1.2s;
+}
+
+#intro-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%) scale(1);
+    object-fit: cover;
+    z-index: 1;
+    transition: transform 2.5s ease;
+}
+
+.intro-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.intro-title {
+    color: var(--light);
+    font-size: 2rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.intro-title, #btn-entrar {
+    position: relative;
+    z-index: 3;
+    margin: 0 !important;
+}
+
+#btn-entrar {
+    max-width: 280px !important;
+    width: auto !important;
+    white-space: nowrap !important;
+}
+
+#intro-preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#intro-preloader.fade-out #intro-video {
+    transform: translate(-50%, -50%) scale(1.25); /* Zoom suave hacia adelante */
+}
+
 /* FONDO AMBIENTAL CON PARPADEO VIVO */
 .ambient-background {
     position: fixed;
@@ -90,7 +171,7 @@ h1, h2, h3, h4 {
 /* SECCIONES Y EFECTO FADE-OUT GLOBAL */
 .luxury-section { padding: 100px 5%; }
 
-.row-luxury, .soul-content, .texture-grid, .sales-card {
+.row-luxury, .soul-content, .texture-grid {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -133,7 +214,7 @@ h1, h2, h3, h4 {
     transform: rotate(-2deg); 
 }
 
-/* CAJA DE TEXTO ENCUADRADA (SIN COLISIONES) */
+/* CAJA DE TEXTO ENCUADRADA */
 .floating-text {
     width: 45%;
     background: rgba(15, 15, 15, 0.95);
@@ -163,7 +244,7 @@ h1, h2, h3, h4 {
 .floating-text.left h2::after { right: 0; }
 .floating-text p { line-height: 1.8; color: #aaa; }
 
-/* MIRADA AL ALMA - DISEÑO CINEMÁTICO REFINADO */
+/* MIRADA AL ALMA */
 .soul-section {
     min-height: 80vh;
     position: relative;
@@ -171,7 +252,7 @@ h1, h2, h3, h4 {
     align-items: center;
     justify-content: center;
     padding: 80px 20px;
-    background: #000; /* Fondo negro profundo por si tarda en cargar la foto */
+    background: #000;
 }
 
 .parallax-fixed {
@@ -181,13 +262,13 @@ h1, h2, h3, h4 {
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    opacity: 0.5; /* Bajamos la opacidad para que el texto resalte de forma premium */
+    opacity: 0.5;
     z-index: 1;
 }
 
 .soul-content {
     position: relative;
-    z-index: 2; /* Por encima de la foto de fondo */
+    z-index: 2;
     width: 100%;
     max-width: 750px;
     display: flex;
@@ -195,17 +276,16 @@ h1, h2, h3, h4 {
 }
 
 .glass-card {
-    background: rgba(10, 10, 10, 0.75); /* Fondo oscuro translúcido */
-    backdrop-filter: blur(12px); /* Efecto difuminado premium */
+    background: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     padding: 60px 40px;
-    border: 1px solid rgba(197, 160, 89, 0.3); /* Borde dorado ultra fino */
+    border: 1px solid rgba(197, 160, 89, 0.3);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
     text-align: center;
     position: relative;
 }
 
-/* Esquinas doradas de adorno tipo herencia/hacienda */
 .glass-card::before, .glass-card::after {
     content: '';
     position: absolute;
@@ -232,67 +312,36 @@ h1, h2, h3, h4 {
     color: #ddd;
 }
 
-/* TEXTURAS ÚNICAS - DISEÑO EDITORIAL */
+/* TEXTURAS ÚNICAS */
 .texture-section { 
     padding: 160px 8%; 
-    background: #050505; /* Mantenemos el negro profundo */
+    background: #050505;
     position: relative;
 }
 
 .texture-grid { 
     display: grid; 
-    grid-template-columns: 1.2fr 1fr; /* Le damos un poco más de peso visual al texto */
+    grid-template-columns: 1.2fr 1fr;
     gap: 80px; 
     align-items: center;
     margin-bottom: 0; 
 }
 
-.texture-text {
-    max-width: 550px;
-}
+.texture-text { max-width: 550px; }
+.texture-text h2 { font-size: 3.5rem; margin-bottom: 30px; line-height: 1.2; text-transform: uppercase; }
+.texture-text p { color: #b3b3b3; line-height: 1.9; font-size: 1.15rem; margin-bottom: 20px; }
 
-.texture-text h2 { 
-    font-size: 3.5rem; 
-    margin-bottom: 30px; 
-    line-height: 1.2;
-    text-transform: uppercase;
-}
-
-.texture-text p { 
-    color: #b3b3b3; 
-    line-height: 1.9; 
-    font-size: 1.15rem; 
-    margin-bottom: 20px;
-}
-
-/* Contenedor de la foto Apalusa con su propio marco de lujo */
-.texture-img-wrapper {
-    position: relative;
-    z-index: 1;
-}
-
+.texture-img-wrapper { position: relative; z-index: 1; }
 .texture-img-wrapper img { 
-    width: 100%; 
-    height: auto; 
-    display: block;
+    width: 100%; height: auto; display: block;
     border: 1px solid rgba(197, 160, 89, 0.2); 
     box-shadow: 0 30px 60px rgba(0,0,0,0.8); 
-    position: relative;
-    z-index: 2;
+    position: relative; z-index: 2;
 }
 
-/* Marco dorado minimalista que sobresale por detrás de la foto */
 .texture-img-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 20px;
-    left: -20px;
-    width: 100%;
-    height: 100%;
-    border: 1px solid var(--gold);
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.5;
+    content: ''; position: absolute; top: 20px; left: -20px; width: 100%; height: 100%;
+    border: 1px solid var(--gold); z-index: 0; pointer-events: none; opacity: 0.5;
 }
 
 /* SECCIÓN VENTAS */
@@ -303,6 +352,7 @@ h1, h2, h3, h4 {
 .card-info { padding: 30px; }
 .card-info h4 { font-size: 1.5rem; color: var(--gold); margin-bottom: 10px; }
 .card-info p { color: #888; font-size: 0.95rem; line-height: 1.5; }
+
 .btn-gold {
     display: inline-block;
     margin-top: 25px;
@@ -320,170 +370,40 @@ h1, h2, h3, h4 {
    AJUSTES EXCLUSIVOS PARA CELULARES Y TABLETS
    ========================================== */
 @media (max-width: 968px) {
-    /* 1. Ajustes del Título Principal */
-    .hero h1 {
-        font-size: 2.2rem; /* Achicamos el título para que no se corte en pantallas chicas */
-        padding: 0 15px;
-    }
-
-    /* 2. Sección Conócenos (Acomodo vertical) */
-    .luxury-section {
-        padding: 60px 20px; /* Reducimos espacios vacíos */
-    }
+    .hero h1 { font-size: 2.2rem; padding: 0 15px; }
+    .luxury-section { padding: 60px 20px; }
 
     .row-luxury, .row-luxury.reverse {
-        flex-direction: column !important; /* Fuerza a que todo vaya uno abajo del otro */
+        flex-direction: column !important;
         margin-bottom: 100px;
         min-height: auto;
         gap: 30px;
     }
 
-    .img-container {
-        width: 100%; /* La imagen toma todo el ancho disponible del cel */
-        max-width: 100%;
-    }
+    .img-container { width: 100%; max-width: 100%; }
+    .frame-deco { top: -10px; left: -10px; right: 10px; bottom: 10px; }
 
-    .frame-deco {
-        top: -10px; left: -10px; right: 10px; bottom: 10px; /* Marco más ajustado en cel */
-    }
-
-    /* Ajuste de los textos flotantes para que ya no floten y se lean bien */
     .floating-text {
         width: 100% !important;
-        position: relative !important; /* Deja de encimarse en la foto */
-        left: 0 !important;
-        right: 0 !important;
-        padding: 30px 20px;
-        box-shadow: none;
-        background: rgba(15, 15, 15, 0.5); /* Más integrado al fondo */
+        position: relative !important;
+        left: 0 !important; right: 0 !important;
+        padding: 30px 20px; box-shadow: none;
+        background: rgba(15, 15, 15, 0.5);
     }
 
-    .floating-text h2 {
-        font-size: 1.8rem;
-    }
+    .floating-text h2 { font-size: 1.8rem; }
+    .big-num { font-size: 4rem; top: -25px; }
 
-    .big-num {
-        font-size: 4rem; /* Número más discreto en móvil */
-        top: -25px;
-    }
+    .parallax-fixed { background-attachment: scroll !important; }
+    .soul-section { min-height: 60vh; }
+    .glass-card { padding: 40px 20px; margin: 0 10px; }
+    .glass-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
+    .glass-card p { font-size: 1rem; line-height: 1.7; }
 
-/* 3. Sección Mirada al Alma en Móvil */
-.parallax-fixed {
-    background-attachment: scroll !important; /* Desactiva el parallax en cel para que no se vea negro */
-}
-
-.soul-section {
-    min-height: 60vh;
-}
-
-.glass-card {
-    padding: 40px 20px;
-    margin: 0 10px;
-}
-
-.glass-card h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-}
-
-.glass-card p {
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-/* 4. Sección Texturas Únicas en Móvil */
-.texture-section {
-    padding: 80px 24px;
-}
-
-.texture-grid {
-    grid-template-columns: 1fr; 
-    gap: 50px; /* Más espacio entre el texto y la foto en vertical */
-}
-
-.texture-text h2 {
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-}
-
-.texture-text p {
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-.texture-img-wrapper {
-    padding-left: 15px; /* Evita que el marco trasero se salga de la pantalla del cel */
-}
-
-.texture-img-wrapper::before {
-    top: 15px;
-    left: -10px;
-}
-
-/* ==========================================
-   PANTALLA DE INTRO (PRELOADER CINEMÁTICO)
-   ========================================== */
-#intro-preloader {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100vh;
-    background-color: #000;
-    z-index: 9999; /* Se superpone a absolutamente todo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.2s;
-    will-change: opacity, transform;
-}
-
-#intro-video {
-    position: absolute;
-    top: 50%; left: 50%;
-    min-width: 100%; min-height: 100%;
-    width: 100%; height: 100%;
-    transform: translate(-50%, -50%) scale(1);
-    object-fit: cover; /* Fuerza al video a comportarse como fondo sin empujar elementos */
-    z-index: 1;
-    transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: transform;
-}
-
-/* Capa oscura forzada a ser absoluta para que flote ENCIMA del video */
-.intro-overlay {
-    position: absolute;
-    top: 0; left: 0;
-    z-index: 2;
-    width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-    background: rgba(0, 0, 0, 0.4); /* Capa uniforme para amarrar el contraste en PC */
-}
-
-.intro-title {
-    color: var(--light);
-    font-size: 2rem;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    opacity: 0.8;
-}
-
-/* Efecto cuando la página se activa (El video hace zoom hacia el usuario) */
-#intro-preloader.fade-out {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-#intro-preloader.fade-out #intro-video {
-    transform: translate(-50%, -50%) scale(1.25); /* Efecto de zoom progresivo hacia adelante */
-}
-
-/* Evita que se pueda scrollear la página trasera mientras está la intro */
-body.no-scroll {
-    overflow: hidden;
-}
+    .texture-section { padding: 80px 24px; }
+    .texture-grid { grid-template-columns: 1fr; gap: 50px; }
+    .texture-text h2 { font-size: 2.2rem; margin-bottom: 20px; }
+    .texture-text p { font-size: 1rem; line-height: 1.7; }
+    .texture-img-wrapper { padding-left: 15px; }
+    .texture-img-wrapper::before { top: 15px; left: -10px; }
 }
